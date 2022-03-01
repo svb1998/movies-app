@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <ion-card *ngIf="details">
+    <ion-card-header>
+      <div class="img-container">
+        <img *ngIf="details.poster_path" [src]="imgPath + details.poster_path" alt="caratula" class="caratula">
+        <div *ngIf="details.vote_average > 0" class="vote-avg-container">
+          {{details.vote_average}}
+        </div>
+      </div>
+
+      <ion-card-title>
+        {{details.title}}
+      </ion-card-title>
+      <div class="sub_info">
+        <span>{{details.release_date | date:'yyyy'}}</span>
+        <span>{{details.original_language | uppercase}}</span>
+
+      </div>
+      <ion-card-content>
+        <div class="description-container">
+          {{details.overview}}
+        </div>
+        <ion-list>
+          <ion-item *ngIf="details.genres">
+            <div class="genres-container">
+              <ion-badge *ngFor=" let genre of details.genres">{{genre.name}}</ion-badge>
+            </div>
+          </ion-item>
+          <ion-item *ngIf="details.homepage">
+            <a class="link" [href]="[details.homepage]">
+              <ion-label slot="start">{{details.homepage }}</ion-label>
+            </a>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card-header>
+
+  </ion-card>
+
+</ion-content>

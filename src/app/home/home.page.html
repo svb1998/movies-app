@@ -1,20 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Pelis App
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-searchbar showCancelButton="focus" placeholder="Busca una película..." [(ngModel)]="busqueda"
+    (ionChange)="buscarString(busqueda)"></ion-searchbar>
+  <h1 class="mas-populares-title" *ngIf="busqueda === ''">Películas más populares</h1>
+  <ion-list>
+    <ion-item *ngFor="let movie of movies" [routerLink]="['/movie-details/' + movie.id ]">
+      {{movie.title}}
+    </ion-item>
+  </ion-list>
 </ion-content>
